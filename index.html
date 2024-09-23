@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Empathetic Spoken Conversation by Cascading Text and Speech LLMs with Speech Emotion Caption</title>
+		<link type="text/css" href="./css/basic.css" rel="stylesheet">
+		<link type="text/css" href="./css/index.css" rel="stylesheet">
+		<link type="text/css" href="./css/bootstrap.min.css" rel="stylesheet">
+		<script type='text/javascript' src="./js/jquery-3.3.1.min.js"></script>
+		<script type='text/javascript' src="./js/index.js"></script>
+	</head>
+	<body>
+		<div class="main">
+			<div class="title">
+				<img class="top-img" src="img/background.png" />
+				<span>Empathetic Spoken Conversation by Cascading Text and Speech LLMs with Speech Emotion Caption</span>
+			</div>
+			<div class="content">
+				<div class="section author"></div>
+				<div class="section">
+					<div class="section-title">ABSTRACT</div>
+					<div class="section-content abstract">
+						Spoken conversation aims to generate empathetic responses based on multimodal chat history. Traditional methods have used Large Language Models (LLMs) to understand paralinguistics and infer responses. However, existing work faces two main challenges: 1) Emotions are often expressed using discrete labels, which may not capture deep emotional nuances for effective empathy. 2) Text-only LLMs are typically used, neglecting the potential of Speech LLMs for response generation. 
+                    To tackle these issues, we introduce ECap-Spoken, a Chinese expressive spoken conversation system that integrates text and speech LLMs with emotion captions. Our approach leverages a Spoken Dialogue LLM to infer response text and speech emotion captions from multimodal history, followed by a Speech Generation LLM to produce expressive speech aligned with emotional cues. We also create a large-scale Chinese spoken conversation dataset with emotion caption, ECap-NCSSD-ZH.
+                    Subjective and objective experiments on LLaMA structure demonstrate our ECap-Spoken achieves superior performance in generating empathetic responses compared to existing advanced systems. Code and speech samples are available at: <a href="https://github.com/AI-S2-Lab/ECap-Spoken"><span  style="color: #1d5da4; ">https://github.com/AI-S2-Lab/ECap-Spoken</span></a>.
+					</div>
+				</div>
+
+				<div class="section">
+					<div class="section-title">MODEL ARCHITECTURE</div>
+					<div class="section-content model" style="text-align: center;">
+						<img src="./img/drawio.png" alt="" class="model-img" style="width: 50%;">
+
+						<p style="padding-top: 1rem; color: #a1a1a1; font-size: 1rem; text-align: center;">Figure:The overview of ECap-Spoken, that consists of two steps. Step-1 adopts the Spoken Dialogue LLM to infer the response text and its corresponding speech emotion caption. Step-2 employs the Speech Generation LLM to generate the final empathetic response speech.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="section">
+				<div class="section-title">EXPERIMENTS</div>
+				<div class="section-content experiments">
+					<!-- We develop four neural TTS systems for a  -->
+					<strong>Comparative Experiment:</strong>
+					</br> 1) <b>Text-Only</b> We adopt the LLaMA 3 to fine-tune a Spoken Dialogue LLM on the ECap-NCSSD-ZH dataset. This model uses only textual information as input, without incorporating speech emotional information in history.
+					</br> 2) <b>ParalinGPT</b> ParalinGPT serializes tasks in the order of current paralinguistic attribute prediction, response paralinguistic attribute prediction, and response text generation with autoregressive conditioning. <a href="https://arxiv.org/abs/2312.15316" style="color: #1d5da4;">[PAPER]</a>
+					</br> 3) <b>Spoken-LLM</b> Spoken-LLM is a fusion of the widely-used open-sourced LLM and a self-supervised speech emotion resentation model. <a href="https://arxiv.org/abs/2402.12786" style="color: #1d5da4;">[PAPER]</a>
+					</br> 4) <b>PerceptiveAgent</b> PerceptiveAgent can generate captions, but unlike this work, we use emotional captions while they use general captions. <a href="https://arxiv.org/abs/2406.12707" style="color: #1d5da4;">[PAPER]</a>
+
+				</div>
+			</div>	
+
+			<div class="section-content ">
+
+				<hr/>
+
+				<div class="subsection-exp-2">
+
+					<!-- 一句话分割 -->
+					<div class="module-content">
+						<div class="chat-container" style="width: 50%;">
+							<b>Predict the reply and caption of the last sentence through the following conversation history</b>
+							<hr />
+							<div class="message your-message">
+								<div class="message-content">
+									<p>我最讨厌网络直播了，都有些无聊的人在那边瞎吹。</p>
+								</div>
+							</div>
+							<div class="message my-message">
+								<div class="message-content">
+									<p>哎呀，不要这么说嘛，网络直播也有很有意思的内容啊。</p>
+								</div>
+							</div>
+							<div class="message your-message">
+								<div class="message-content">
+									<p>有意思啊？除了看美女秀，还有什么好看的？</p>
+								</div>
+							</div>
+							<div class="message my-message">
+								<div class="message-content">
+									<p>其实还有很很多其他的直播内容，比如游戏直播。</p>
+								</div>
+							</div>
+							<div class="message your-message">
+								<div class="message-content">
+									<p>我觉得那些直播主要是为了赚钱才那么卖力的，根本就没什么真才实学</p>
+								</div>
+							</div>
+							<div class="message my-message">
+								<div class="message-content">
+									<p>那并不是所有的主播都是为了赚钱，有些人是真的喜欢这样的交流。</p>
+								</div>
+							</div>
+							<div class="message your-message">
+								<div class="message-content">
+									<p>我觉得他们就是用观众的好奇心赚取利益，根本不值得我去花时间去看。</p>
+								</div>
+							</div>
+							<div class="message my-message">
+								<div class="message-content">
+									<p>每个人都有自己的喜好，如果你不感兴趣那就看，没有必要对直播抱有那么大偏见。</p>
+								</div>
+							</div>
+							<div class="message your-message">
+								<div class="message-content">
+									<p>......</p>
+								</div>
+							</div>
+						</div>
+						<div id="table_4" style="text-align: center;">
+							<b>All voices are generated by cosyvoice</b>
+							<table>
+								<thead>
+									<colgroup>
+									<col width=20%></col>
+									<col width=30%></col>
+									<col width=30%></col>
+									<col width=20%></col>
+									</colgroup>
+									<tr>
+									<th colspan="1" style="text-align: center"><strong>Comparative</strong></th>
+									<th colspan="1" style="text-align: center"><strong>Predicted Response</strong></th>
+									<th colspan="1" style="text-align: center"><strong>Caption</strong></th>
+									<th colspan="1" style="text-align: center"><strong>speech</strong></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="text-align: center">Ground Truth</td>
+										<td style="text-align: center">反正我是不会去看的，觉得那些网络直播啊一点意思都没有。</td>
+										<td style="text-align: center">语速较快，话语中带着不耐烦的情绪</td>
+										<td style="text-align: center"><audio src="./audio/res_0.wav" controls="" preload=""></audio></td>
+									</tr>
+									<tr>
+										<td style="text-align: center">ECap-Spoken</td>
+										<td style="text-align: center">我是不会去看那些网络直播，都是些无聊的内容。</td>
+										<td style="text-align: center">语气中透露着一种不耐烦，心情很急躁</td>
+										<td style="text-align: center"><audio src="./audio/res_1.wav" controls="" preload=""></audio></td>
+									</tr>
+									<tr>
+										<td style="text-align: center">Text-Only</td>
+										<td style="text-align: center">我觉得自己选择怎么看就好，别人怎么做我管不了。</td>
+										<td style="text-align: center">语气中透露着一种无奈的情绪</td>
+										<td style="text-align: center"><audio src="./audio/res_2.wav" controls="" preload=""></audio></td>
+									</tr>
+									<tr>
+										<td style="text-align: center">ParalinGPT</td>
+										<td style="text-align: center">我还是不太理解为何有人会喜欢看这种东西。</td>
+										<td style="text-align: center"><中立></td>
+										<td style="text-align: center"><audio src="./audio/res_3.wav" controls="" preload=""></audio></td>
+									</tr>
+									<tr>
+										<td style="text-align: center">Spoken-LLM</td>
+										<td style="text-align: center">嗯，对的，每个人都有自己的喜好，不应该强加自己的观点给别人。</td>
+										<td style="text-align: center"><难过/sad></td>
+										<td style="text-align: center"><audio src="./audio/res_4.wav" controls="" preload=""></audio></td>
+									</tr>
+									<tr>
+										<td style="text-align: center">PerceptiveAgent</td>
+										<td style="text-align: center">每个人都有自己的喜好，如果你不感兴趣那就看，没有必要对直播抱有那么大偏见。</td>
+										<td style="text-align: center">他的声音很大，语速适中，语调中性。</td>
+										<td style="text-align: center"><audio src="./audio/res_5.wav" controls="" preload=""></audio></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<hr />
+
+					<hr />
+					<div class="module-content">
+						<div class="chat-container" style="width: 50%;">
+							<b>Predict the reply and caption of the last sentence through the following conversation history</b>
+							<hr />
+							<div class="message your-message">
+								<div class="message-content">
+									<p>你怎么还没准备好筹备婚礼的事情啊？哎。</p>
+								</div>
+							</div>
+							<div class="message my-message">
+								<div class="message-content">
+									<p>我已经很努力了，但是有些事情确实需要更多时间来处理嘛。</p>
+								</div>
+							</div>
+							<div class="message your-message">
+								<div class="message-content">
+									<p>你总是拖延，这么重要的事情，你怎么可以不认真对待呢？</p>
+								</div>
+							</div>
+							<div class="message my-message">
+								<div class="message-content">
+									<p>我又不是故意敷衍的，只是有些事情出现意外状况，导致进度有点慢。</p>
+								</div>
+							</div>
+							<div class="message your-message">
+								<div class="message-content">
+									<p>我已经为这个婚礼付出了那么多，你难道不知道吗？你为什么不尽力配合啊？</p>
+								</div>
+							</div>
+							<div class="message my-message">
+								<div class="message-content">
+									<p>我知道你为这个婚礼付出很多，那我也在尽力配合，只是进度上有些困难而已啊。</p>
+								</div>
+							</div>
+							<div class="message your-message">
+								<div class="message-content">
+									<p>你总是找借口，我现在真的很失望。</p>
+								</div>
+							</div>
+							<div class="message my-message">
+								<div class="message-content">
+									<p>......</p>
+								</div>
+							</div>
+						</div>
+						<div id="table_4" style="text-align: center;">
+							<b>All voices are generated by cosyvoice</b>
+							<table>
+								<thead>
+									<colgroup>
+									<col width=20%></col>
+									<col width=30%></col>
+									<col width=30%></col>
+									<col width=20%></col>
+									</colgroup>
+									<tr>
+									<th colspan="1" style="text-align: center"><strong>Comparative</strong></th>
+									<th colspan="1" style="text-align: center"><strong>Predicted Response</strong></th>
+									<th colspan="1" style="text-align: center"><strong>Caption/Laber</strong></th>
+									<th colspan="1" style="text-align: center"><strong>speech</strong></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="text-align: center">Ground Truth</td>
+										<td style="text-align: center">我没有在找借口，我会尽快完成剩下工作，不要再责怪我了。</td>
+										<td style="text-align: center">语速较快，话语中带着不耐烦的情绪</td>
+										<td style="text-align: center"><audio src="./audio/res_6.wav" controls="" preload=""></audio></td>
+									</tr>
+									<tr>
+										<td style="text-align: center">ECap-Spoken</td>
+										<td style="text-align: center">我不是真的很努力吗？我现在就要去准备了，拜拜。</td>
+										<td style="text-align: center">语气十分不悦，情绪中带有些许恼火。</td>
+										<td style="text-align: center"><audio src="./audio/res_7.wav" controls="" preload=""></audio></td>
+									</tr>
+									<tr>
+										<td style="text-align: center">Text-Only</td>
+										<td style="text-align: center">我真的很抱歉，没想到你会这么失望，我会加倍努力的。</td>
+										<td style="text-align: center">语气中透露着内心的不满和不屑，夹杂着一丝无奈。</td>
+										<td style="text-align: center"><audio src="./audio/res_8.wav" controls="" preload=""></audio></td>
+									</tr>
+									<tr>
+										<td style="text-align: center">ParalinGPT</td>
+										<td style="text-align: center">我真的不是故意的，我会尽快尽快把事情做好的，请你相信我。</td>
+										<td style="text-align: center"><消极></td>
+										<td style="text-align: center"><audio src="./audio/res_9.wav" controls="" preload=""></audio></td>
+									</tr>
+									<tr>
+										<td style="text-align: center">Spoken-LLM</td>
+										<td style="text-align: center">你不能只考虑自己的感受，还要考虑到别人的感受，婚礼是我们俩的，大家都期待着这个大喜日子。</td>
+										<td style="text-align: center"><生气/angry></td>
+										<td style="text-align: center"><audio src="./audio/res_10.wav" controls="" preload=""></audio></td>
+									</tr>
+									<tr>
+										<td style="text-align: center">PerceptiveAgent</td>
+										<td style="text-align: center">我知道我可能没有做到你的期望，但请相信我，我会尽力赶上来的。</td>
+										<td style="text-align: center">他的声音音量大，语速适中，语气中性，语气中带着一丝坚定。</td>
+										<td style="text-align: center"><audio src="./audio/res_11.wav" controls="" preload=""></audio></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
